@@ -2,10 +2,12 @@ $bleh: orange;
 
 body {
   background: grey;
+}
+
+#container {
+  display: flex;
+  flex-flow: row wrap;
+
 
 }
 
-h1 {
-    background: $bleh;
-    color: grey;
-}

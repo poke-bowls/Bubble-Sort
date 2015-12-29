@@ -1,6 +1,6 @@
 body {
   background: grey; }
 
-h1 {
-  background: orange;
-  color: grey; }
+#container {
+  display: flex;
+  flex-flow: row wrap; }

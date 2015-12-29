@@ -1,4 +1,4 @@
-var bubbleModule = function() {
+var bubbleModule = module.exports = function() {
   //private
   var moves = 0;
 
@@ -23,6 +23,7 @@ var bubbleModule = function() {
           return bubbleSort( input );
         }
       }
+      return moves;
     };
 
   //public
