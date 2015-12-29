@@ -15,7 +15,23 @@ describe( 'bubbleSort', function() {
     var input = [ 1, 3, 2 ];
     var result = bubbleSort( input );
 
-    expect( result ).to.be.equal(  );
+    expect( result ).to.be.a( 'number' );
+    expect( result ).to.be.equal( 1 );
 
+    input = [ 50, 2, 1, 4, 5 ];
+
+    expect( result ).to.be.a( 'number' );
+    expect( result ).to.be.equal( 5 );
   });
+
+  //should test for inputs that are not arrays
+
+
+
+
+
+
+
+
+
 });
