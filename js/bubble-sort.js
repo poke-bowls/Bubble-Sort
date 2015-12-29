@@ -26,6 +26,3 @@ module.exports = function(){
     return moves;
   }
 };
-
-var funk = [ 2, 1, 4, 5, 7, 8, 123413, 3, 1 ];
-bubbleSort( funk );
