@@ -1,11 +1,125 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-// var bubbleModule = require('./bubble-sort.js');
-// var bubbleGraphic = require('./bubble-graphic.js');
-// var quickModule = require('./quick-sort.js');
-// var mergeModule = require('./merge-sort.js');
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_c93916f1.js","/")
-},{"buffer":3,"pBGvAp":5}],2:[function(require,module,exports){
+//visually show the array and it's values
+//graphically represent the sorting action to see real-time movement
+//seeing sorting in real-time is impossible, so figure it out. Thanks.
+
+var myArray = [ 1231, 5, 32, 6, 1, 23, 7, 323, 1, 2 ];
+window.onload = function() {
+  function graphBubbles( input ) {
+
+    for( var j = 0; j < input.length; j++ ) {
+
+      var $newDiv = $('<div/>');
+        $newDiv.attr( 'id', 'index' + j );
+        $newDiv.attr( 'class', 'bubble' );
+
+      var value = '<p>' + input[j] + '</p>';
+
+
+      $( container ).append( $newDiv );
+      $( '#index' + j ).append( value );
+      bubbleModule.bubbleSort( myArray );
+    }
+
+  }
+  graphBubbles( myArray );
+};
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/bubble-graphic.js","/")
+},{"buffer":6,"pBGvAp":8}],2:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var bubbleModule = module.exports = function() {
+  //private
+  var moves = 0;
+
+  bubbleSort = function ( input ){
+    if( Array.isArray( input ) === false ) {
+      throw new TypeError ( 'Input must be an array!' );
+    }
+
+    //splice array and add the spliced value (which is in a new array)
+    //to the original array at the index right after the one being
+    //compared if it is greater than it
+    //make directions more confusing
+
+      for ( var i = 0; i < input.length; i++) {
+
+        if ( input[i] > input[i + 1] ) {
+          var toAdd = input.splice( i, 1 );
+
+          input.splice(  i+1, 0, toAdd[0] );
+
+          moves += 1;
+          return bubbleSort( input );
+        }
+      }
+      return moves;
+    };
+
+  //public
+  return {
+    bubbleSort: bubbleSort,
+    moves: moves
+  };
+}();
+
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/bubble-sort.js","/")
+},{"buffer":6,"pBGvAp":8}],3:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+var bubbleModule = require('./bubble-sort.js');
+var bubbleGraphic = require('./bubble-graphic.js');
+var quickModule = require('./quick-sort.js');
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_94ba515d.js","/")
+},{"./bubble-graphic.js":1,"./bubble-sort.js":2,"./quick-sort.js":4,"buffer":6,"pBGvAp":8}],4:[function(require,module,exports){
+(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
+//pivot
+//partitioning ( left and right partitions, pivot is not a part of either of them but must be saved )
+//recursion ( recursively pass in the left and right partitions until they are sorted )
+//concatenation
+
+var quickModule = module.exports = function() {
+
+  //private
+  var left = [];
+  var right = [];
+
+  quickSort = function quickSort( input ) {
+    var left = [];
+    var right = [];
+
+    if ( Array.isArray( input ) === false ) {
+      throw new TypeError( 'Input must be an array!' );
+    }
+
+    var length = input.length;
+    var pivot = input[Math.round( length / 2 ) - 1];
+
+
+    //iterate through the values of the array, pushing into 'left' or 'right'
+    //if the numbers are less than or greater than the pivot index
+
+    for ( var k = 0; k < input.length; k++ ) {
+
+      if ( pivot > input[k]  ) {
+        left.push( input[k] );
+      } else if ( pivot < input[k] ){
+        right.push( input[k] );
+      }
+    }
+
+    if ( length <= 1 ){
+      return input;
+    } else {
+      return quickSort(left).concat( pivot, quickSort(right));
+    }
+  };
+  //public
+  return {
+    quickSort: quickSort
+  };
+}();
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/quick-sort.js","/")
+},{"buffer":6,"pBGvAp":8}],5:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
@@ -133,7 +247,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
 }).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/base64-js/lib/b64.js","/../node_modules/base64-js/lib")
-},{"buffer":3,"pBGvAp":5}],3:[function(require,module,exports){
+},{"buffer":6,"pBGvAp":8}],6:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 /*!
  * The buffer module from node.js, for the browser.
@@ -1246,7 +1360,7 @@ function assert (test, message) {
 }
 
 }).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/buffer/index.js","/../node_modules/buffer")
-},{"base64-js":2,"buffer":3,"ieee754":4,"pBGvAp":5}],4:[function(require,module,exports){
+},{"base64-js":5,"buffer":6,"ieee754":7,"pBGvAp":8}],7:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
@@ -1334,7 +1448,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 }
 
 }).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/ieee754/index.js","/../node_modules/ieee754")
-},{"buffer":3,"pBGvAp":5}],5:[function(require,module,exports){
+},{"buffer":6,"pBGvAp":8}],8:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 // shim for using process in browser
 
@@ -1401,4 +1515,4 @@ process.chdir = function (dir) {
 };
 
 }).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/../node_modules/process/browser.js","/../node_modules/process")
-},{"buffer":3,"pBGvAp":5}]},{},[1])
+},{"buffer":6,"pBGvAp":8}]},{},[3])

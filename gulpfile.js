@@ -32,7 +32,7 @@ gulp.task('build', function() {
         .pipe(browserify({
           insertGlobals : true
         }))
-        .pipe(gulp.dest('./js/build'));
+        .pipe(gulp.dest('./public/build'));
 });
 
 gulp.task('default', ['connect', 'watch', 'sass', 'build']);

@@ -19,7 +19,6 @@ window.onload = function() {
       $( '#index' + j ).append( value );
       bubbleModule.bubbleSort( myArray );
     }
-
   }
   graphBubbles( myArray );
 };

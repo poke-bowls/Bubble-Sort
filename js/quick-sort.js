@@ -6,8 +6,6 @@
 var quickModule = module.exports = function() {
 
   //private
-  var left = [];
-  var right = [];
 
   quickSort = function quickSort( input ) {
     var left = [];
