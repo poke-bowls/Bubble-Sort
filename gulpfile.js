@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var connect = require('gulp-connect');
+var browserify = require('gulp-browserify');
 
 gulp.task('connect', function(){
   connect.server({
@@ -26,4 +27,12 @@ gulp.task('watch', function () {
   gulp.watch('./public/**/*', ['livereload']);
 });
 
-gulp.task('default', ['connect', 'watch', 'sass']);
+gulp.task('build', function() {
+  gulp.src('./js/app.js')
+        .pipe(browserify({
+          insertGlobals : true
+        }))
+        .pipe(gulp.dest('./js/build'));
+});
+
+gulp.task('default', ['connect', 'watch', 'sass', 'build']);
