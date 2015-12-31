@@ -20,7 +20,7 @@ var quickModule = module.exports = function() {
 
 
     //iterate through the values of the array, pushing into 'left' or 'right'
-    //if the numbers are less than or greater than the pivot index
+    //if the numbers are less than or greater than the pivot
 
     for ( var k = 0; k < input.length; k++ ) {
 
